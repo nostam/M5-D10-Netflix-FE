@@ -4,7 +4,6 @@ import { Row, Col } from "react-bootstrap";
 const Comment = (props) => {
   return (
     <Row className="my-4" key={props.comments._id}>
-      {console.log(props)}
       <Col style={{ backgroundColor: "#141414", color: "#fff" }}>
         <h6>{props.comments.comment}</h6> <br />
         <span>Rating: {props.comments.rate} out of 5 </span>

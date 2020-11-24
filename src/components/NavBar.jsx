@@ -34,18 +34,26 @@ const NavBar = (props) => {
                 Home
               </Nav.Link>
             </Link>
-            <Nav.Link href="#link" className="nav">
-              Tv Shows
-            </Nav.Link>
-            <Nav.Link href="#link" className="nav">
-              Movies
-            </Nav.Link>
-            <Nav.Link href="#link" className="nav">
-              Recently Added
-            </Nav.Link>
-            <Nav.Link href="#link" className="nav">
-              My List
-            </Nav.Link>
+            <Link to="/movie/tt0372784" activeClassName="active">
+              <Nav.Link href="#link" className="nav">
+                Batman Begins
+              </Nav.Link>
+            </Link>
+            <Link to="/series/Harry+Potter" activeClassName="active">
+              <Nav.Link href="/series/Harry+Potter" className="nav">
+                Harry Potter Series
+              </Nav.Link>
+            </Link>
+            {/* <Link to="/" activeClassName="active">
+              <Nav.Link href="#link" className="nav">
+                Recently Added
+              </Nav.Link>
+            </Link>
+            <Link to="/" activeClassName="active">
+              <Nav.Link href="#link" className="nav">
+                My List
+              </Nav.Link>
+            </Link> */}
           </Nav>
           <Form inline>
             <FontAwesomeIcon icon={faSearch} />

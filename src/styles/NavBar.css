@@ -1,17 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap");
 
-.logo{
-    width: 7rem;
+.logo {
+  width: 7rem;
 }
-.menu{
-    font-size: 2rem;
+.menu {
+  font-size: 2rem;
 }
-.nav{
-    background-color: #141414;
-    color: gray !important;
-    font-family: 'Lato', sans-serif;
+.nav {
+  background-color: #141414;
+  color: gray !important;
+  font-family: "Lato", sans-serif;
 }
- 
-.nav a{
-    color: gray !important;
+
+.nav a {
+  color: gray !important;
+}
+.nav.active {
+  color: white !important;
 }

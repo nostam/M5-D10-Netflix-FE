@@ -17,6 +17,12 @@ class App extends React.Component {
           path="/movie/:id"
           render={(props) => <ShowDetail title="Movie Details" {...props} />}
         />
+        <Route
+          path="/series/:series"
+          render={(props) => (
+            <MovieList series={props.match.params.series} {...props} />
+          )}
+        />
         <Footer />
       </Router>
     );

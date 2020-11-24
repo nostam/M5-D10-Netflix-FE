@@ -1,16 +1,26 @@
 import React, { Component } from "react";
 import { Container, Button, Form, FormControl } from "react-bootstrap";
+import { withRouter } from "react-router-dom";
 import ModalMovie from "./ModalMovie";
 import MoviesRow from "./MoviesRow";
 
-export default class MovieList extends Component {
+class MovieList extends Component {
   state = {
     show: false,
     currentMovie: [],
     searchQuery: "",
     showSearch: false,
+    showSeries: false,
   };
-  componentDidMount = (movie) => {};
+  componentDidMount = async () => {
+    console.log(this.props.match.params.series);
+    try {
+      await this.handleSearch(this.props.match.params.series);
+      this.setState({ showseries: true });
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   handleOpenModal = async (movieId) => {
     this.setState({ show: true, currentMovie: movieId });
@@ -31,8 +41,10 @@ export default class MovieList extends Component {
 
   render() {
     let { show, currentMovie } = this.state;
+
     return (
       <div>
+        {console.log(this.props)}
         <Container className="d-flex justify-content-end" fluid>
           <Form inline>
             <FormControl
@@ -53,11 +65,15 @@ export default class MovieList extends Component {
             </Button>
           </Form>
         </Container>
-        <MoviesRow handleOpenModal={this.handleOpenModal} query={"Batman"} />
-        <MoviesRow
-          handleOpenModal={this.handleOpenModal}
-          query={"Harry Potter"}
-        />
+        {!this.state.showSeries && (
+          <MoviesRow handleOpenModal={this.handleOpenModal} query={"Batman"} />
+        )}
+        {this.props.match.params.series && (
+          <MoviesRow
+            handleOpenModal={this.handleOpenModal}
+            query={this.props.match.params.series}
+          />
+        )}
         {this.state.showSearch ? (
           <>
             <MoviesRow
@@ -77,3 +93,4 @@ export default class MovieList extends Component {
     );
   }
 }
+export default withRouter(MovieList);
