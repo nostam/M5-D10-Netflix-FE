@@ -36,7 +36,6 @@ export default class MoviesRow extends Component {
     movies: [],
     sorted: true,
     loading: true,
-    imgLoading: true,
   };
 
   componentDidMount = async () => {
@@ -67,8 +66,8 @@ export default class MoviesRow extends Component {
       });
       if (res.ok) {
         let data = await res.json();
-        this.setState({ movies: data.Search, loading: false });
-        setTimeout(() => this.setState({ imgLoading: false }), 2000);
+        this.setState({ movies: data.Search });
+        setTimeout(() => this.setState({ loading: false }), 1000); // TODO individual img loading spinner
       }
     } catch (e) {
       this.setState({ loading: false });
@@ -112,50 +111,19 @@ export default class MoviesRow extends Component {
                 </div>
               ))}
             </Slider>
-
-            {/* <Carousel
-              swipeable={false}
-              draggable={false}
-              showDots={false}
-              responsive={responsive}
-              ssr={false} // means to render carousel on server-side.
-              infinite={true}
-              autoPlay={this.props.deviceType !== "mobile" ? true : false}
-              autoPlaySpeed={5000}
-              keyBoardControl={true}
-              customTransition="all .5"
-              transitionDuration={500}
-              containerClass="carousel-container"
-              removeArrowOnDeviceType={["tablet", "mobile"]}
-              deviceType={this.props.deviceType}
-              dotListClass="custom-dot-list-style"
-              itemClass="carousel-item-padding-40-px"
-            >
-              {movies.map((movie) => (
-                <div
-                  className="movieRowImg"
-                  key={movie.imdbID}
-                  onClick={() => this.props.handleOpenModal(movie.imdbID)}
-                >
-                  <img
-                    className="img-fluid"
-                    src={movie.Poster}
-                    alt="movie-poster"
-                  />
-                </div>
-              ))}
-            </Carousel> */}
           </Container>
         ) : (
-          <Alert
-            variant="warning"
-            className="d-flex text-center justify-content-center"
-          >
-            <h4>Loading {this.props.query} Movies</h4>
-            <Spinner animation="border" role="status" variant="warning">
-              <span className="sr-only">Loading Posters...</span>
-            </Spinner>
-          </Alert>
+          <Container className="my-5">
+            <Alert
+              variant="warning"
+              className="d-flex text-center justify-content-center"
+            >
+              <h4>Loading {this.props.query} Movies</h4>
+              <Spinner animation="border" role="status" variant="warning">
+                <span className="sr-only">Loading Posters...</span>
+              </Spinner>
+            </Alert>
+          </Container>
         )}
       </>
     );

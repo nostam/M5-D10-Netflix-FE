@@ -14,7 +14,6 @@ class showDetail extends Component {
   state = {
     currentMovie: {},
     updateComments: "false",
-    imdbStars: null,
   };
   componentDidMount = async () => {
     try {
@@ -35,7 +34,6 @@ class showDetail extends Component {
         console.log(data);
         console.log(typeof data);
         this.setState({ currentMovie: data });
-        this.setState({ imdbStars: Math.floor(data.imdbRating) / 2 });
       }
     } catch (e) {
       console.log(e);
