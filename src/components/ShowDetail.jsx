@@ -3,16 +3,18 @@ import { Container, Row, Col, Button, FormControl } from "react-bootstrap";
 import "../styles/SingleMoviePage.css";
 import { withRouter } from "react-router-dom";
 import StarIcon from "@material-ui/icons/Star";
+import StarHalfIcon from "@material-ui/icons/StarHalf";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import AddCommentIcon from "@material-ui/icons/AddComment";
 import AddComment from "./AddComment";
 import CommentsList from "./CommentsList";
 
-class SinlgeMoviePage extends Component {
+class showDetail extends Component {
   state = {
     currentMovie: {},
     updateComments: "false",
+    imdbStars: null,
   };
   componentDidMount = async () => {
     try {
@@ -33,6 +35,7 @@ class SinlgeMoviePage extends Component {
         console.log(data);
         console.log(typeof data);
         this.setState({ currentMovie: data });
+        this.setState({ imdbStars: Math.floor(data.imdbRating) / 2 });
       }
     } catch (e) {
       console.log(e);
@@ -46,6 +49,7 @@ class SinlgeMoviePage extends Component {
     return (
       <Container className="my-3 singleMoviePage">
         <Row>
+          <h1>{this.props.title}</h1>
           <Col md={3} className="d-flex align-items-center">
             <img
               src={currentMovie.Poster}
@@ -64,13 +68,18 @@ class SinlgeMoviePage extends Component {
                   {currentMovie.Year} - {currentMovie.Genre} -{" "}
                   {currentMovie.Runtime}{" "}
                 </h6>
-
                 <span className="d-flex mb-4">
                   {Array(5)
                     .fill("")
                     .map((item) => (
                       <StarIcon style={{ color: "#ffc107" }} />
                     ))}
+                  {/* {currentMovie.imdbRating % 2 >= 5 ? (
+                    <StarHalfIcon style={{ color: "#ffc107" }} />
+                  ) : (
+                    ""
+                  )} */}
+                  <h5>{currentMovie.imdbRating}</h5>
                 </span>
                 <p> {currentMovie.Plot}</p>
                 <Row className="d-flex flex-column align-items-start divider py-4">
@@ -167,4 +176,4 @@ class SinlgeMoviePage extends Component {
     );
   }
 }
-export default withRouter(SinlgeMoviePage);
+export default withRouter(showDetail);

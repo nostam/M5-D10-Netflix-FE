@@ -1,5 +1,5 @@
 import React from "react";
-import { Spinner } from "react-bootstrap";
+import { Spinner, Container } from "react-bootstrap";
 
 import Comment from "./Comment";
 
@@ -84,8 +84,8 @@ class CommentsList extends React.Component {
 
   render() {
     return (
-      <div className="mb-5">
-        <h2>Comments: </h2>
+      <Container className="my-5">
+        <h3>Comments: </h3>
         {this.state.loading && (
           <div className="font-bold d-flex justify-content-center">
             <span>Feching comments</span>
@@ -99,7 +99,7 @@ class CommentsList extends React.Component {
             handleDel={this.handleCommentDelete}
           />
         ))}
-      </div>
+      </Container>
     );
   }
 }

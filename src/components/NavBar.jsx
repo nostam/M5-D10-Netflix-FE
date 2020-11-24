@@ -8,6 +8,7 @@ import {
   Button,
   Alert,
 } from "react-bootstrap";
+import { Link, withRouter } from "react-router-dom";
 import logo from "../imgs/LOGO.png";
 import "../styles/NavBar.css";
 
@@ -15,19 +16,24 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 
-const NavBar = () => {
+const NavBar = (props) => {
   return (
     <>
       <Navbar expand="lg" className="nav">
-        <Navbar.Brand href="#home">
-          <img className="logo" src={logo} alt="netflix" />
-        </Navbar.Brand>
+        <Link to="/">
+          <Navbar.Brand href="#home">
+            <img className="logo" src={logo} alt="netflix" />
+            <span className="sr-only">{props.title}</span>
+          </Navbar.Brand>
+        </Link>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Nav.Link href="#home" className="nav">
-              Home
-            </Nav.Link>
+            <Link to="/" activeClassName="active">
+              <Nav.Link href="#home" className="nav">
+                Home
+              </Nav.Link>
+            </Link>
             <Nav.Link href="#link" className="nav">
               Tv Shows
             </Nav.Link>
@@ -72,4 +78,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default withRouter(NavBar);
