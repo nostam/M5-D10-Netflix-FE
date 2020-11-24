@@ -13,11 +13,14 @@ class MovieList extends Component {
     showSeries: false,
   };
   componentDidMount = async () => {
-    console.log(this.props.match.params.series);
+    this.setState({ showSeries: false });
     try {
       await this.handleSearch(this.props.match.params.series);
-      this.setState({ showseries: true });
+      if (this.props.match.params.series) {
+        this.setState({ showseries: true });
+      }
     } catch (e) {
+      this.setState({ showSeries: false });
       console.log(e);
     }
   };
@@ -41,12 +44,11 @@ class MovieList extends Component {
 
   render() {
     let { show, currentMovie } = this.state;
-
     return (
       <div>
-        {console.log(this.props)}
+        {/* {console.log(this.props)} */}
         <Container className="d-flex justify-content-end" fluid>
-          <Form inline>
+          {/* <Form inline>
             <FormControl
               type="text"
               placeholder="Search"
@@ -63,9 +65,9 @@ class MovieList extends Component {
             >
               Search
             </Button>
-          </Form>
+          </Form> */}
         </Container>
-        {!this.state.showSeries && (
+        {!this.props.match.params.series && (
           <MoviesRow handleOpenModal={this.handleOpenModal} query={"Batman"} />
         )}
         {this.props.match.params.series && (
@@ -74,7 +76,7 @@ class MovieList extends Component {
             query={this.props.match.params.series}
           />
         )}
-        {this.state.showSearch ? (
+        {/* {this.state.showSearch ? (
           <>
             <MoviesRow
               handleOpenModal={this.handleOpenModal}
@@ -83,7 +85,7 @@ class MovieList extends Component {
           </>
         ) : (
           ""
-        )}
+        )} */}
         <ModalMovie
           handleClose={this.handleCloseModal}
           show={show}

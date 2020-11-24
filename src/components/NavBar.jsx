@@ -44,6 +44,11 @@ const NavBar = (props) => {
                 Harry Potter Series
               </Nav.Link>
             </Link>
+            <Link to="/series/Fate+Stay+Night" activeClassName="active">
+              <Nav.Link href="/series/Fate+Stay+Night" className="nav">
+                Fate Series
+              </Nav.Link>
+            </Link>
             {/* <Link to="/" activeClassName="active">
               <Nav.Link href="#link" className="nav">
                 Recently Added
