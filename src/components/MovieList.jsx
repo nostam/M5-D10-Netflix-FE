@@ -74,6 +74,7 @@ class MovieList extends Component {
           <MoviesRow
             handleOpenModal={this.handleOpenModal}
             query={this.props.match.params.series}
+            series="Series"
           />
         )}
         {/* {this.state.showSearch ? (

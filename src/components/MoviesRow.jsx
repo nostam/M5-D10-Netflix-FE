@@ -88,6 +88,7 @@ export default class MoviesRow extends Component {
           >
             <Row className="d-flex align-items-center justify-content-between px-5">
               <h3 className="movieRowTitle text-capitalize text-white my-3">
+                {this.props.series ? this.props.series + " for " : ""}
                 {this.props.query}
               </h3>
               <SortIcon
