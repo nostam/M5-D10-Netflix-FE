@@ -39,12 +39,12 @@ const NavBar = (props) => {
                 Batman Begins
               </Nav.Link>
             </Link>
-            <Link to="/series/Harry+Potter" activeClassName="active">
+            <Link to="/series/Harry Potter" activeClassName="active">
               <Nav.Link href="/series/Harry+Potter" className="nav">
                 Harry Potter Series
               </Nav.Link>
             </Link>
-            <Link to="/series/Fate+Stay+Night" activeClassName="active">
+            <Link to="/series/Fate Stay Night" activeClassName="active">
               <Nav.Link href="/series/Fate+Stay+Night" className="nav">
                 Fate Series
               </Nav.Link>

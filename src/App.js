@@ -19,9 +19,7 @@ class App extends React.Component {
         />
         <Route
           path="/series/:series"
-          render={(props) => (
-            <MovieList series={props.match.params.series} {...props} />
-          )}
+          render={(props) => <MovieList {...props} />}
         />
         <Footer />
       </Router>

@@ -43,7 +43,12 @@ export default class MoviesRow extends Component {
     this.fetchMovies(this.props.query);
     // console.log(this.state.movies);
   };
-
+  componentDidUpdate = async (prevProps, prevState) => {
+    if (prevProps.query !== this.props.query) {
+      this.fetchMovies(this.props.query);
+    }
+    // console.log(this.state.movies);
+  };
   sortByYear = () => {
     let { movies } = this.state;
     let moviesByYear = movies.sort(
