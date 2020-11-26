@@ -34,7 +34,7 @@ export default class Registration extends Component {
       ? this.setState({
           isValid: false,
           alert: true,
-          alertMsg: "Credit Card format incorrect",
+          alertMsg: "Incorrect Credit Card Format",
         })
       : this.setState({ alert: false, alertMsg: "" });
   };
