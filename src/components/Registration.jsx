@@ -11,7 +11,13 @@ import {
 import "../styles/Registration.css";
 
 export default class Registration extends Component {
-  state = { isValid: false, alert: false, alertMsg: "", info: {} };
+  state = {
+    isValid: false,
+    isNameValid: false,
+    alert: false,
+    alertMsg: "",
+    info: {},
+  };
   handleSubmit = (e) => {
     e.preventDefault();
     this.setState({ alert: false, alertMsg: "" });
@@ -25,10 +31,10 @@ export default class Registration extends Component {
       info: { ...this.state.info, [e.target.name]: e.target.value },
     });
     e.target.name === "creditCard" &&
-    e.target.value.length >= 16 &&
+    e.target.value.length === 16 &&
     !isNaN(e.target.value)
       ? this.setState({ isValid: true, alert: false, alertMsg: "" })
-      : e.target.value.length > 12 &&
+      : (e.target.value.length > 12 || e.target.value.length > 16) &&
         e.target.name === "creditCard" &&
         isNaN(e.target.value)
       ? this.setState({
