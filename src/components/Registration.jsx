@@ -139,7 +139,8 @@ export default class Registration extends Component {
                 <Form.Label htmlFor="validationCity">City</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="city"
+                  name="city"
+                  placeholder="City"
                   required
                   id="city"
                   value={this.state.city}
