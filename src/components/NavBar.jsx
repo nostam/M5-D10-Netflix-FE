@@ -85,6 +85,9 @@ const NavBar = (props) => {
             <Nav.Link href="#link"></Nav.Link>
             <Nav.Link href="#link"></Nav.Link>
           </Form>
+          <Link to="/register">
+            <span>Register</span>
+          </Link>
         </Navbar.Collapse>
       </Navbar>
     </>

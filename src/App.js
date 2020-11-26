@@ -7,6 +7,7 @@ import NavBar from "./components/NavBar";
 import ShowDetail from "./components/ShowDetail";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
+import Registration from "./components/Registration";
 class App extends React.Component {
   render() {
     return (
@@ -20,6 +21,11 @@ class App extends React.Component {
         <Route
           path="/series/:series"
           render={(props) => <MovieList {...props} />}
+        />
+        <Route
+          path="/register"
+          exact
+          render={(props) => <Registration {...props} />}
         />
         <Footer />
       </Router>
