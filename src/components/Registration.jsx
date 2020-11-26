@@ -53,7 +53,7 @@ export default class Registration extends Component {
                 <Form.Label htmlFor="firstName">First Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="FirstName"
+                  name="firstName"
                   id="firstName"
                   placeholder="First Name"
                   required
@@ -65,7 +65,7 @@ export default class Registration extends Component {
                 <Form.Label htmlFor="lastName">Last Name</Form.Label>
                 <Form.Control
                   type="text"
-                  name="LastName"
+                  name="lastName"
                   id="lastName"
                   placeholder="Last Name"
                   required
@@ -121,7 +121,7 @@ export default class Registration extends Component {
                 <Form.Label htmlFor="streeAddress">Street Address</Form.Label>
                 <Form.Control
                   type="text"
-                  name="StreetAddress"
+                  name="streetAddress"
                   id="streeAddress"
                   placeholder="Street Address"
                   required
@@ -133,7 +133,7 @@ export default class Registration extends Component {
                 <Form.Label htmlFor="validationCity">City</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="City"
+                  placeholder="city"
                   required
                   id="city"
                   value={this.state.city}
