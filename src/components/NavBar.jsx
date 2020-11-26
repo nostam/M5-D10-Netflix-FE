@@ -67,9 +67,9 @@ const NavBar = (props) => {
             </Nav.Link>
             <NavDropdown
               title="User"
-              // menuAlign="right"
-              id="dropdown-menu-align-right"
+              id="nav-user-dropdown-menu"
               className="nav"
+              alignRight
               style={{ color: "gray !important" }}
             >
               <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
