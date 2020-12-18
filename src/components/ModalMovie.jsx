@@ -29,12 +29,9 @@ export default class ModalMovie extends Component {
   };
 
   fetchMovies = async (q) => {
-    let baseUrl = `http://www.omdbapi.com/?`;
-    let apiKey = process.env.OMDB_API_KEY;
+    const url = process.env.REACT_APP_API_URL;
     try {
-      let res = await fetch(`${baseUrl}i=${q}&${apiKey}`, {
-        method: "GET",
-      });
+      let res = await fetch(url + "media" + q);
       if (res.ok) {
         let data = await res.json();
         console.log(data);
