@@ -59,7 +59,7 @@ export default class MoviesRow extends Component {
   fetchMovies = async (q) => {
     this.setState({ loading: true });
     let baseUrl = `http://www.omdbapi.com/?`;
-    let apiKey = `apikey=8b7d8ea7&`;
+    let apiKey = process.env.OMDB_API_KEY;
     try {
       let res = await fetch(`${baseUrl}s=${q}&${apiKey}`, {
         method: "GET",
