@@ -8,7 +8,7 @@ import {
   Button,
   FormFile,
 } from "react-bootstrap";
-import "../styles/Registration.css";
+import "./index.css";
 
 export default class Registration extends Component {
   state = {

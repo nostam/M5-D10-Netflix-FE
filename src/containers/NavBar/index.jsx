@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   Nav,
@@ -8,15 +8,17 @@ import {
   Button,
   Alert,
 } from "react-bootstrap";
-import { Link, withRouter } from "react-router-dom";
-import logo from "../imgs/LOGO.png";
-import "../styles/NavBar.css";
+import { Link, withRouter, NavLink } from "react-router-dom";
+import logo from "../../imgs/LOGO.png";
+import "./index.css";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
+import NavBarSearch from "../../components/NavBarSearch";
 
-const NavBar = (props) => {
+function NavBar(props) {
+  const [showSearchBox, setShowSearchBox] = useState(false);
   return (
     <>
       <Navbar expand="lg" className="nav">
@@ -29,39 +31,41 @@ const NavBar = (props) => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="mr-auto">
-            <Link to="/" activeClassName="active">
-              <Nav.Link href="#home" className="nav">
-                Home
-              </Nav.Link>
-            </Link>
-            <Link to="/movie/tt0372784" activeClassName="active">
-              <Nav.Link href="#link" className="nav">
-                Batman Begins
-              </Nav.Link>
-            </Link>
-            <Link to="/series/Harry Potter" activeClassName="active">
-              <Nav.Link href="/series/Harry+Potter" className="nav">
-                Harry Potter Series
-              </Nav.Link>
-            </Link>
-            <Link to="/series/Fate Stay Night" activeClassName="active">
-              <Nav.Link href="/series/Fate+Stay+Night" className="nav">
-                Fate Series
-              </Nav.Link>
-            </Link>
-            {/* <Link to="/" activeClassName="active">
-              <Nav.Link href="#link" className="nav">
-                Recently Added
-              </Nav.Link>
-            </Link>
-            <Link to="/" activeClassName="active">
-              <Nav.Link href="#link" className="nav">
-                My List
-              </Nav.Link>
-            </Link> */}
+            <NavLink to="/" exact activeClassName="active" className="nav">
+              Home
+            </NavLink>
+            <NavLink
+              to="/movie/tt0848228"
+              exact
+              activeClassName="active"
+              className="nav mx-2"
+            >
+              The Avengers
+            </NavLink>
+            <NavLink
+              to="/series/lord of the ring"
+              exact
+              activeClassName="active"
+              className="nav mx-2"
+            >
+              Lord of the rings Series
+            </NavLink>
+
+            <NavLink
+              to="/series/Fate Stay Night"
+              exact
+              activeClassName="active"
+              className="nav mx-2"
+            >
+              Fate Series
+            </NavLink>
           </Nav>
           <Form inline>
-            <FontAwesomeIcon icon={faSearch} />
+            {showSearchBox && <NavBarSearch />}
+            <FontAwesomeIcon
+              icon={faSearch}
+              onClick={() => setShowSearchBox(!showSearchBox)}
+            />
             <Nav.Link href="#link" className="nav">
               KIDS
             </Nav.Link>
@@ -92,6 +96,6 @@ const NavBar = (props) => {
       </Navbar>
     </>
   );
-};
+}
 
 export default withRouter(NavBar);

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { Container, Row, Col, Button, FormControl } from "react-bootstrap";
-import "../styles/SingleMoviePage.css";
+import "./index.css";
 import { withRouter } from "react-router-dom";
 import StarIcon from "@material-ui/icons/Star";
 import StarOutlineIcon from "@material-ui/icons/StarOutlined";
 import PlayCircleFilledIcon from "@material-ui/icons/PlayCircleFilled";
 import PlaylistAddIcon from "@material-ui/icons/PlaylistAdd";
 import AddCommentIcon from "@material-ui/icons/AddComment";
-import AddComment from "./AddComment";
-import CommentsList from "./CommentsList";
+import AddComment from "../../containers/AddComment";
+import CommentsList from "../../containers/CommentsList";
 
 class showDetail extends Component {
   state = {
@@ -22,10 +22,11 @@ class showDetail extends Component {
       console.log(e);
     }
   };
+  //omdb i
   fetchMovies = async (q) => {
     const url = process.env.REACT_APP_API_URL;
     try {
-      let res = await fetch(url + "/media" + q);
+      let res = await fetch(url + "/media/" + q);
       if (res.ok) {
         let data = await res.json();
         console.log(data);
@@ -129,45 +130,16 @@ class showDetail extends Component {
         </Row>
         <Row>
           <CommentsList
-            movieId={currentMovie.imdbID}
+            movieID={currentMovie.imdbID}
             updateComState={this.state.updateComments}
             updateComments={this.updateComments}
           />
           <AddComment
             img={currentMovie.Poster}
-            movieId={currentMovie.imdbID}
+            movieID={currentMovie.imdbID}
             updateComments={this.updateComments}
           />
         </Row>
-        {/* <Row>
-          <div className="d-flex align-items-center mr-3 nav__search my-4">
-            <FormControl
-              type="text"
-              placeholder="Search Comments"
-              className="mr-sm-2"
-              onChange={(e) => this.filterComments(e)}
-            />
-            <SearchIcon />
-          </div>
-        </Row>
-        {comments.map((comment) => (
-          <SingleComment
-            id={comment._id}
-            comment={comment.comment}
-            rate={comment.rate}
-            author={comment.author}
-            key={comment._id}
-            handleDeleteComment={this.handleDeleteComment}
-          />
-        ))}
-        <Row className="w-100">
-          <CommentForm
-            handleSubmit={this.handleSubmit}
-            handleChange={this.handleChange}
-            comment={this.state.singleComment.comment}
-            rate={this.state.singleComment.rate}
-          />
-        </Row> */}
       </Container>
     );
   }

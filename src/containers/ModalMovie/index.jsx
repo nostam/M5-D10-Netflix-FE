@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Modal, Button, Container, Col, Row } from "react-bootstrap";
 import NavigateNextIcon from "@material-ui/icons/NavigateNext";
-import "../styles/ModalMovie.css";
+import "./index.css";
 import { Link, Route, Switch } from "react-router-dom";
 
 export default class ModalMovie extends Component {
@@ -9,12 +9,12 @@ export default class ModalMovie extends Component {
     super(props);
     this.state = {
       currenntMovie: {},
-      currentMovieId: props.currenntMovie,
+      currentMovieID: props.currenntMovie,
     };
   }
 
   //   componentDidMount = async (props) => {
-  //     console.log(this.state.currenntMovieId);
+  //     console.log(this.state.currenntMovieID);
   //     console.log(this.props.currenntMovie);
   //   };
 
@@ -27,11 +27,11 @@ export default class ModalMovie extends Component {
       await this.fetchMovies(query);
     }
   };
-
+  // omdb i
   fetchMovies = async (q) => {
     const url = process.env.REACT_APP_API_URL;
     try {
-      let res = await fetch(url + "media" + q);
+      let res = await fetch(url + "/media/" + q);
       if (res.ok) {
         let data = await res.json();
         console.log(data);
@@ -79,7 +79,7 @@ export default class ModalMovie extends Component {
                   <NavigateNextIcon
                     style={{ cursor: "pointer", fontSize: "30px" }}
                   />
-                </Link>{" "}
+                </Link>
               </Col>
             </Row>
           </Container>

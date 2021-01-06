@@ -5,9 +5,9 @@ import TwitterIcon from "@material-ui/icons/Twitter";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import YouTubeIcon from "@material-ui/icons/YouTube";
 import CopyrightIcon from "@material-ui/icons/Copyright";
-import "../styles/Footer.css";
 // import { FaFacebookSquare } from "fontawesome";
-// import "../style/Footer.css";
+import "./index.css";
+
 class footer extends React.Component {
   render() {
     return (

@@ -1,7 +1,6 @@
 import React from "react";
 import { Spinner, Container } from "react-bootstrap";
-
-import Comment from "./Comment";
+import Comment from "../../components/Comments";
 
 class CommentsList extends React.Component {
   constructor(props) {
@@ -10,14 +9,14 @@ class CommentsList extends React.Component {
     this.state = {
       comments: [],
       loading: true,
-      movieId: "",
+      movieID: "",
       updateComment: false,
     };
   }
 
   componentDidUpdate = async (prevProp, prevState) => {
-    if (prevProp.movieId !== this.props.movieId) {
-      await this.setState({ movieId: this.props.movieId });
+    if (prevProp.movieID !== this.props.movieID) {
+      await this.setState({ movieID: this.props.movieID });
       await this.fetchComments();
       console.log(this.state.comments);
     }
@@ -32,14 +31,13 @@ class CommentsList extends React.Component {
   };
 
   fetchComments = async () => {
-    let { movieId } = this.state;
+    let { movieID } = this.state;
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" + movieId,
+        `${process.env.REACT_APP_API_URL}/media/${movieID}/reviews`,
         {
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2N2JhNTk4MzViMDAwMTc1ODRlZmMiLCJpYXQiOjE2MDU3OTQ3MjUsImV4cCI6MTYwNzAwNDMyNX0.ZBxn9E-dluFBsGqKAIwygPI84Tzr0ZI6d9U_RszFQw0",
+            Authorization: "",
           },
         }
       );
@@ -52,30 +50,17 @@ class CommentsList extends React.Component {
   };
 
   handleCommentDelete = async (id) => {
-    let objToDelete = id;
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" + objToDelete,
+        `${process.env.REACT_APP_API_URL}/reviews/${id}`,
         {
           method: "DELETE",
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2N2JhNTk4MzViMDAwMTc1ODRlZmMiLCJpYXQiOjE2MDU3OTQ3MjUsImV4cCI6MTYwNzAwNDMyNX0.ZBxn9E-dluFBsGqKAIwygPI84Tzr0ZI6d9U_RszFQw0",
+            Authorization: "",
           },
         }
       );
-      let deletedComment = await response.json();
-      console.log(response);
-      if (response.ok) {
-        this.setState({ updateComment: true });
-      } else {
-      }
-      // let newComments = this.state.comments.splice(index, 1);
-
-      let newComments = this.state.comments.filter(
-        (obj) => obj !== objToDelete
-      );
-      console.log("comments without the deleted one: ", newComments);
+      let newComments = await response.json();
       this.setState({ comments: newComments });
     } catch (e) {
       console.log("error at deleting, ", e);
@@ -92,11 +77,11 @@ class CommentsList extends React.Component {
             <Spinner animation="border" variant="success" />
           </div>
         )}
-        {this.state.comments.map((comments, index) => (
+        {this.state.comments.map((comment, index) => (
           <Comment
             key={index}
-            comments={comments}
-            handleDel={this.handleCommentDelete}
+            comment={comment}
+            handleDel={() => this.handleCommentDelete(comment._id)}
           />
         ))}
       </Container>

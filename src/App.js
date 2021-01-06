@@ -1,18 +1,19 @@
 import React from "react";
 // import { Link, Route, Switch } from "react-router-dom";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import MovieList from "./components/MovieList";
+import MovieList from "./pages/MovieList";
 import Footer from "./components/Footer";
-import NavBar from "./components/NavBar";
-import ShowDetail from "./components/ShowDetail";
+import NavBar from "./containers/NavBar";
+import ShowDetail from "./pages/ShowDeatils";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Registration from "./components/Registration";
+import Registration from "./pages/Registration";
 class App extends React.Component {
+  state = { searchQuery: null };
   render() {
     return (
       <Router className="App">
-        <NavBar title="Strivix" />
+        <NavBar title="Strivix" searchQuery={this.state.searchQuery} />
         <Route path="/" exact component={MovieList} />
         <Route
           path="/movie/:id"

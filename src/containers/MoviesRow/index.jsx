@@ -6,14 +6,14 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import "../styles/MovieRow.css";
+import "./index.css";
 
 const settings = {
   dots: false,
   infinite: true,
   speed: 500,
   slidesToShow: 6,
-  slidesToScroll: 6,
+  slidesToScroll: 3,
   swipeToSlide: true,
   lazyLoad: true,
   responsive: [
@@ -39,7 +39,7 @@ export default class MoviesRow extends Component {
   };
 
   componentDidMount = async () => {
-    this.fetchMovies(this.props.query);
+    this.fetchMovies();
     // console.log(this.state.movies);
   };
   componentDidUpdate = async (prevProps, prevState) => {
@@ -55,15 +55,27 @@ export default class MoviesRow extends Component {
     );
     this.setState({ movies: moviesByYear, sorted: true });
   };
-
-  fetchMovies = async (q) => {
-    this.setState({ loading: true });
+  urlOptions = () => {
     const url = process.env.REACT_APP_API_URL;
+    if (this.props["series"]) {
+      return `${url}/media?title=${this.props.query}`;
+    }
+
+    return `${url}/media`;
+  };
+  handleSlidesToShow = () => {
+    return this.state.movies.length < 6 ? 3 : 6;
+  };
+  // omdb s
+  fetchMovies = async () => {
     try {
-      let res = await fetch(url + "/media" + q);
+      let res = await fetch(this.urlOptions());
+      console.log(this.urlOptions());
       if (res.ok) {
         let data = await res.json();
-        this.setState({ movies: data.Search });
+        console.log(data);
+        settings.slidesToShow = data.length < 6 ? data.length : 6;
+        this.setState({ movies: data });
         setTimeout(() => this.setState({ loading: false }), 1000); // TODO individual img loading spinner
       }
     } catch (e) {
@@ -84,6 +96,7 @@ export default class MoviesRow extends Component {
           >
             <Row className="d-flex align-items-center justify-content-between px-5">
               <h3 className="movieRowTitle text-capitalize text-white my-3">
+                {!this.props.query ? "Library" : ""}
                 {this.props.series ? this.props.series + " for " : ""}
                 {this.props.query}
               </h3>

@@ -5,7 +5,7 @@ class AddComment extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      movieId: "",
+      movieID: "",
       comment: {
         comment: "",
         rate: 0,
@@ -15,10 +15,9 @@ class AddComment extends React.Component {
       loading: false,
     };
   }
-
-  componentDidUpdate = async (prevProp, prevState) => {
-    if (prevProp.movieId !== this.props.movieId) {
-      this.setState({ movieId: this.props.movieId });
+  componentDidUpdazte = async (prevProp, prevState) => {
+    if (prevProp.movieID !== this.props.movieID) {
+      this.setState({ movieID: this.props.movieID });
     }
   };
   updateCommentField = (e) => {
@@ -27,29 +26,21 @@ class AddComment extends React.Component {
     console.log("currentId: ", currentId);
     //reservation['phone'] --> reservation.phone = '3'
     comment[currentId] = e.currentTarget.value;
-    comment.elementId = this.state.movieId;
-    console.log(this.state.movieId);
+    comment.elementId = this.state.movieID;
+    console.log(this.state.movieID);
     this.setState({ comment: comment });
     console.log(this.state.comment);
   };
 
   submitComment = async (e) => {
-    let { movieId } = this.state;
+    let { movieID } = this.state;
     e.preventDefault();
     this.setState({ loading: true });
     try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/",
-        {
-          method: "POST",
-          body: JSON.stringify(this.state.comment),
-          headers: new Headers({
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1ZmI2N2JhNTk4MzViMDAwMTc1ODRlZmMiLCJpYXQiOjE2MDU3OTQ3MjUsImV4cCI6MTYwNzAwNDMyNX0.ZBxn9E-dluFBsGqKAIwygPI84Tzr0ZI6d9U_RszFQw0",
-            "Content-Type": "application/json",
-          }),
-        }
-      );
+      let response = await fetch(`${process.env.REACT_APP_API_URL}/reviews`, {
+        method: "POST",
+        body: JSON.stringify(this.state.comment),
+      });
       console.log("POST response, ", response);
       if (response.ok) {
         alert("yayyyy! commented successfully!");
@@ -98,13 +89,6 @@ class AddComment extends React.Component {
           </div>
         )}
         <Form className="w-100 mb-5" onSubmit={this.submitComment}>
-          <Row>
-            <img
-              src={this.props.img}
-              style={{ width: "30px", height: "30px", margin: "0 auto" }}
-              alt="book cover"
-            />
-          </Row>
           <Row>
             <Col md={12}>
               <Form.Group>
